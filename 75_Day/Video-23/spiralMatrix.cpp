@@ -9,7 +9,11 @@ vector<int> spiralOrder(vector<vector<int>>& matrix) {
         vector<int> temp;
         int i=0,j=0;
         while(i<rows && j<cols){
-            cout<<matrix[i][j]l
+            //print the rowws
+            cout<<matrix[i][j]<<endl;
+            i++;
+            
+
         }
 
 }
