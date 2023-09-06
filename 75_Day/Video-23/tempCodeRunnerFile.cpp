@@ -1,3 +1,3 @@
-swap(a[zI],a[j]);
-        zI++;
-        j++;
+for(auto i:arr){
+        cout<<i<<endl;
+    }
