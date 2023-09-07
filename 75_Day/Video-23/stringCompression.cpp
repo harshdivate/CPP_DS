@@ -50,7 +50,7 @@ int main() {
     vector<char> arr={'a','b','b','b','b','b','b','b','b','b','b','b','b','b','b'};
 
     int ans=compress(arr);
-    cout<<ans;
+    
     for(auto i:arr){
         cout<<i<<endl;
     }
