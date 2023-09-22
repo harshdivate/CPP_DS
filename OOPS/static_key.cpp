@@ -15,8 +15,8 @@ class Hero{
     char level;
     static int timetoComplete;
     //can only access static memebers
-    static int random(){
-
+    static void random(){
+        cout<<"10"<<endl;
     }
 
     void setLevel(char level){
@@ -42,6 +42,7 @@ int Hero::timetoComplete=10;
 
 int main(){
     Hero h;
+    Hero::random();f
     
     cout<<"Hero "<<Hero::timetoComplete<<endl;
 
