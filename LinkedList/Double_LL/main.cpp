@@ -1,7 +1,6 @@
 #include<iostream>
 using namespace std;
 
-
 class Node{
     public:
     int data;
@@ -13,58 +12,45 @@ class Node{
         this->prev=NULL;
         this->next=NULL;
     }
-
     ~Node(){
         int value=this->data;
-        if(next!=NULL){
+        if(this->next!=NULL){
             delete next;
             next=NULL;
         }
-        cout<<"Deleted the data"<<value<<endl;
+        cout<<value<<" "<<endl;
     }
 };
 
 
-void print(Node* &head){
-    Node* temp=head;
-    while(temp!=NULL){
-        cout<<"Data is "<<temp->data<<" ";
-        temp=temp->next;
-    }
-
-}
-
-void insertAtHead(Node* &tail,Node* &head,int data){
+void insertAtHead(Node* &tail,Node* &head, int data){
     if(head==NULL){
         Node* newHead=new Node(data);
         head=newHead;
-        tail=newHead;
+        tail=head;
     }
     else{
-        Node* temp=new Node(data);
-        head->prev=temp;
-        temp->next=head;
-        head=temp;
-
+        Node* newInsert=new Node(data);
+        newInsert->next=head;
+        head->prev=newInsert;
+        head=newInsert;
     }
-    
 }
-
 void insertAtTail(Node* &head,Node* &tail,int data){
     if(tail==NULL){
         Node* newTail=new Node(data);
-        tail=newTail;
         head=newTail;
+        tail=head;
     }
     else{
-        Node* temp=new Node(data);
-        tail->next=temp;
-        temp->prev=tail;
-        tail=temp;
+        Node* newTail=new Node(data);
+        newTail->prev=tail;
+        tail->next=newTail;
+        tail=newTail;
     }
-    
 }
-void insertAtPosition(Node* &head,Node*&tail,int data,int position){
+
+void insertAtPosition(Node* &head,Node* &tail,int data, int position){
     if (position==1){
         insertAtHead(tail,head,data);
         return;
@@ -79,15 +65,16 @@ void insertAtPosition(Node* &head,Node*&tail,int data,int position){
         insertAtTail(head,tail,data);
         return;
     }
-    Node* newNode=new Node(data);
-    temp->next->prev=newNode;
-    newNode->next=temp->next;
-    temp->next=newNode;
-    newNode->prev=temp;
+    Node* newInsert=new Node(data);
+    newInsert->next=temp->next;
+    temp->next->prev=newInsert;
+    newInsert->prev=temp;
+    temp->next=newInsert;
 
 }
 
-void deletion(Node* &head,Node* &tail,int position){
+
+void deleteNode(Node* &head,Node* &tail,int position){
     if(position==1){
         Node* temp=head;
         temp->next->prev=NULL;
@@ -95,12 +82,11 @@ void deletion(Node* &head,Node* &tail,int position){
         temp->next=NULL;
         delete temp;
     }
-    //else differenct position;
     else{
         Node* curr=head;
         Node* prev=NULL;
         int cnt=1;
-        while(cnt<=position-1){
+        while(cnt<position){
             prev=curr;
             curr=curr->next;
             cnt++;
@@ -108,26 +94,42 @@ void deletion(Node* &head,Node* &tail,int position){
         if(curr->next==NULL){
             tail=prev;
         }
+        prev->next=curr->next; //
+        
+        curr->next=NULL; //
         curr->prev=NULL;
-        prev->next=curr->next;
-        curr->next=NULL;
-        delete curr;
+        delete curr;    
+    }
+    
+
+
+}
+void print(Node* head){
+    Node* temp=head;
+    while(temp!=NULL){
+        cout<<"Data is"<<temp->data<<" ";
+        temp=temp->next;
     }
 }
+
 int main(){
     Node* head=NULL;
     Node* tail=NULL;
-    head=new Node(1);
-    tail=head;
-    insertAtHead(tail,head,2);
-    insertAtHead(tail,head,3);
-    insertAtTail(head,tail,99);
-    insertAtPosition(head,tail,33,3);
-    insertAtPosition(head,tail,44,5);
-    print(head);
-    deletion(head,tail,3);
+    insertAtHead(tail,head,10);
+    insertAtHead(tail,head,20);
+    insertAtTail(head,tail,9);
+    cout<<"Head"<<head->data<<endl;
+    cout<<"Tail"<<tail->data<<endl;
+    insertAtPosition(head,tail,33,4);
+    cout<<"Head"<<head->data<<endl;
+    cout<<"Tail"<<tail->data<<endl;
     print(head);
     cout<<"Head"<<head->data<<endl;
     cout<<"Tail"<<tail->data<<endl;
+    deleteNode(head,tail,4);
+    print(head);
+    cout<<"Head"<<head->data<<endl;
+    cout<<"Tail"<<tail->data<<endl;
+
     return 0;
 }
