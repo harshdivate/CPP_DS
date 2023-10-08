@@ -64,10 +64,14 @@ void deleteNode(Node* &tail,Node* &head,int position){
     Node* curr=head;
     Node* prev=NULL;
     int cnt=1;
-    while(cnt<position-1){
+
+    while(cnt<position){
         prev=curr;
         curr=curr->next;
         cnt++;
+    }
+    if(curr->next==NULL){
+        tail=prev;
     }
     prev->next=curr->next;
     curr->next=NULL;
@@ -92,6 +96,11 @@ int main(){
     insertAtTail(tail,9);
     insertAtPosition(tail,node1,3,33);
     
+    print(node1);
+
+    deleteNode(tail,node1,5);
+    cout<<"Head"<<node1->data<<endl;
+    cout<<"Tail"<<tail->data<<endl;
     print(node1);
     
 
