@@ -10,16 +10,17 @@ class queue{
 
     queue(int size){
         this->size=size;
-        
+        first=0;
         arr=new int[size];
+        last=0;
       
     }
 
     void enqueue(int data){
   
         if(first!=size-1){
-            first++;
             arr[first]=data;
+            first++;
         }else{
             cout<<"Queue is Full"<<endl;
         }
@@ -33,18 +34,21 @@ class queue{
         }
     }
 
-    bool isEmpty(){
+    void isEmpty(){
         if(first!=last){
-            return false;
+            cout<<"Not Empty";
+        }else{
+            cout<<"Empty";
+
         }
-        return true;
     }
 
-    int peek(){
+    void peek(){
         if(first!=last){
-            return arr[first];
+            cout<<arr[first];
+        }else{
+            cout<<-1;
         }
-        return -1;
     }
     void print(){
         if(first!=last){
@@ -57,15 +61,23 @@ class queue{
             cout<<"Queue is Empty"<<endl;
         }
     }
+    void details(){
+
+        cout<<"First\t"<<first<<endl;
+        cout<<"Last\t"<<last<<endl;
+    }
 };
 
 int main(){
     queue q(3);
-    q.enqueue(10);
-    q.enqueue(20);
-    q.enqueue(30);
-    q.enqueue(30);
+    q.isEmpty();
+    // q.enqueue(10);
+    // q.enqueue(20);
+    // q.enqueue(30);
+    q.details();
+    // q.peek();
+    // q.enqueue(30);
     cout<<endl;
-    q.print();
+    // q.print();
     return 0;
 }
